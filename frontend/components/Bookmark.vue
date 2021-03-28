@@ -8,10 +8,12 @@
       class="grid place-items-center transition-all duration-300 rounded-[2rem] w-[56px]"
       :class="[ !bookmarked ? 'bg-gray-900 group-hover:bg-gray-800 text-gray-600' : 'bg-cyan-900 text-white' ]"
     >
-      T
+      <svg width="10" height="18" viewBox="0 0 10 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0V18L5 12.9419L10 18V0H0Z" />
+      </svg>
     </div>
     <div
-      class="grid place-items-center ml-4 pr-6 rounded-[2rem] sr-only"
+      class="grid place-items-center rounded-[2rem] sr-only sm:not-sr-only sm:ml-4 sm:pr-6"
       :class="[ !bookmarked ? 'text-gray-800' : 'text-cyan-900' ]"
     >
       {{ bookmarked ? 'Bookmarked' : 'Bookmark' }}

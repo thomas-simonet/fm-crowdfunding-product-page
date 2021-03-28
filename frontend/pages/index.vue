@@ -1,41 +1,35 @@
 <template>
   <div>
-    <div class="mt-[300px]">
-      Projects list
-    </div>
-
-    <RouterLink to="project/mastercraft-bamboo-monitor-riser">
-      Mastercraft Bamboo Monitor Riser
-    </RouterLink>
+    <img
+      class="h-[300px] object-cover"
+      src="https://source.unsplash.com/random/3000x400"
+      loading="lazy"
+      alt=""
+    >
+    <ProjectsList :projects="projects" />
   </div>
 </template>
 
 <script>
+import { allProjects } from '~/common/graphql/query'
+
 export default {
+
+  async fetch () {
+    await this.$axios.post('/graphql',
+      allProjects
+    )
+      .then((res) => {
+        if (res.status === 200) {
+          this.projects = res.data.data.projects
+        }
+      })
+      .catch(err => console.log(err))
+  },
+
   data () {
     return {
-      rewards: [
-        {
-          id: 1,
-          title: 'Bamboo Stand',
-          description: 'You get an ergonomic stand made of natural bamboo. You\'ve helped us launch our promotional campaign, and you’ll be added to a special Backer member list.',
-          min: 25,
-          stock: 100
-        },
-        {
-          id: 1,
-          title: 'Bamboo Stand',
-          description: 'You get an ergonomic stand made of natural bamboo. You\'ve helped us launch our promotional campaign, and you’ll be added to a special Backer member list.',
-          min: 25,
-          stock: 0
-        }
-      ],
-      project: {
-        backed: '89,914',
-        maximumBack: '100,000',
-        totalBackers: '5,007',
-        daysLeft: '56'
-      }
+      projects: []
     }
   }
 }

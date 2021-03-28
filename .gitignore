@@ -89,4 +89,33 @@ sw.*
 # Vim swap files
 *.swp
 
+# Logs and databases
+.tmp
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+
+# Node.js
+lib-cov
+lcov.info
+pids
+logs
+results
+node_modules
+.node_history
+
+# Tests
+testApp
+coverage
+
+# Strapi
+.env
+license.txt
+exports
+*.cache
+build
+.strapi-updater.json
+
+# Custom
 design

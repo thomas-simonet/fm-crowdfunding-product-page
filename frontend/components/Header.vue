@@ -23,6 +23,7 @@
           <img v-if="!menuActive" key="open" src="~/assets/images/icon-hamburger.svg" alt="">
           <img v-else key="close" src="~/assets/images/icon-close-menu.svg" alt="">
         </Transition>
+
         <span class="sr-only">
           Menu
         </span>
@@ -45,6 +46,7 @@
               About
             </NuxtLink>
           </li>
+
           <li
             v-if="menuActive"
             key="discover"
@@ -54,12 +56,13 @@
               Discover
             </NuxtLink>
           </li>
+
           <li
             v-if="menuActive"
             key="started"
             class="p-6 bg-white text-lg font-medium leading-[22px] rounded-b-lg"
           >
-            <NuxtLink to="get-start">
+            <NuxtLink to="get-started">
               Get Started
             </NuxtLink>
           </li>

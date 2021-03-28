@@ -1,4 +1,13 @@
+
+html,
+body,
+#__nuxt,
+#__layout {
+  min-height: 100%;
+}
+
 body {
   font-family: "Commissioner";
+  line-height: 17px;
   background-color: #fafafa;
 }

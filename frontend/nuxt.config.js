@@ -1,7 +1,7 @@
 export default {
 
   head: {
-    title: 'frontend',
+    title: 'Crowdfund',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -26,14 +26,26 @@ export default {
   ],
 
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
 
-  axios: {},
-
   tailwindcss: {
+    cssPath: '~/assets/css/tailwind.css',
     jit: true
   },
+
+  axios: {
+    proxy: true,
+    retry: {
+      retries: 5
+    }
+  },
+
+  proxy: [
+    // Proxies /graphql to http://localhost:1337/graphql
+    'http://localhost:1337/graphql'
+  ],
 
   googleFonts: {
     families: {

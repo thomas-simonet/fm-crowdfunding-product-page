@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply py-4 px-10 text-white font-bold bg-cyan-500 leading-5 rounded-[2rem] transition-all duration-300 hover:bg-cyan-900;
+  }
+
+  .btn[disabled] {
+    @apply bg-gray-900 bg-opacity-50 pointer-events-none;
+  }
+
+  .btn-small {
+    @apply text-sm leading-4;
+  }
+
+  .project-block {
+    @apply mb-6 px-6 pb-10 bg-white rounded-lg border border-black border-opacity-5 sm:px-12;
+  }
+}

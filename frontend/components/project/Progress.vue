@@ -23,6 +23,7 @@ export default {
 
 <style lang="scss" scoped>
 progress {
+  display: block;
   appearance: none;
   border: none;
 
