@@ -42,9 +42,12 @@
       "maxLength": 200
     },
     "slug": {
-      "type": "string",
-      "required": true,
-      "unique": true
+      "type": "uid",
+      "targetField": "title"
+    },
+    "rewards": {
+      "via": "project",
+      "collection": "award"
     }
   }
 }

@@ -1,9 +1,9 @@
 <template>
   <progress
-    :value="progress"
+    :value="percentage"
     max="100"
   >
-    Progress: {{ progress }}%
+    Progress: {{ percentage }}%
   </progress>
 </template>
 
@@ -16,6 +16,16 @@ export default {
     progress: {
       type: Number,
       required: true
+    },
+    goal: {
+      type: Number,
+      required: true
+    }
+  },
+
+  computed: {
+    percentage () {
+      return (this.goal / this.progress)
     }
   }
 }

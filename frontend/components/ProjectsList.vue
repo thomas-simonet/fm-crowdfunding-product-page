@@ -1,5 +1,5 @@
 <template>
-  <div class="projects-list pb-10 max-w-[730px] mx-auto space-y-6 transform -translate-y-14">
+  <div class="projects-list space-y-6 pb-10">
     <article
       v-for="project in projects"
       :key="project.id"

@@ -1,10 +1,6 @@
 <template>
-  <div
-    class="relative"
-  >
-    <span
-      class="absolute top-1/2 left-6 transform -translate-y-1/2 font-body font-bold text-sm leading-none text-black text-opacity-25"
-    >
+  <div class="relative">
+    <span class="absolute top-1/2 left-6 transform -translate-y-1/2 font-body font-bold text-sm leading-none text-black text-opacity-25">
       {{ currency }}
     </span>
 

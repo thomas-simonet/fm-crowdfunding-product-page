@@ -1,23 +1,16 @@
 <template>
-  <div>
-    <img
-      class="h-[300px] object-cover"
-      src="https://source.unsplash.com/random/3000x400"
-      loading="lazy"
-      alt=""
-    >
-    <ProjectsList :projects="projects" />
-  </div>
+  <ProjectsList :projects="projects" />
 </template>
 
 <script>
-import { allProjects } from '~/common/graphql/query'
+import { getProjects } from '~/common/graphql/query.js'
+import headerThumbnailState from '~/common/state/header.js'
 
 export default {
 
   async fetch () {
     await this.$axios.post('/graphql',
-      allProjects
+      getProjects
     )
       .then((res) => {
         if (res.status === 200) {
@@ -31,6 +24,10 @@ export default {
     return {
       projects: []
     }
+  },
+
+  beforeMount () {
+    headerThumbnailState.src = 'https://source.unsplash.com/random/2600x400'
   }
 }
 </script>

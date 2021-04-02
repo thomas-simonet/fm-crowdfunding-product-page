@@ -1,6 +1,10 @@
 <template>
   <header>
-    <div class="pt-[52px] project-block">
+    <div class="relative pt-[52px] project-block">
+      <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <img src="~/assets/images/logo-mastercraft.svg" alt="">
+      </div>
+
       <h1 class="mb-4 text-xl text-center font-bold leading-6 sm:text-3xl">
         {{ project.title }}
       </h1>
@@ -14,46 +18,45 @@
           Back this project
         </Button>
 
-        <Bookmark :bookmarked="false" />
+        <Bookmark />
       </div>
     </div>
 
-    <div class="project-block pt-8 sm:py-12">
+    <div class="project-block mt-6 pt-8 sm:py-12">
       <div class="mb-8 space-y-12 sm:mb-9 sm:space-y-0 sm:grid sm:grid-cols-3 md:grid-cols-[179px 1fr 227px]">
-        <ProjectMeta>
-          <template #title>
-            $89,914
-          </template>
-          <template #description>
-            {{ `of $${project.goal} backed` }}
-          </template>
+        <ProjectMeta
+          :prefix="'$'"
+          :value="89914"
+        >
+          {{ `of $${project.goal} backed` }}
         </ProjectMeta>
 
-        <ProjectMeta class="separator">
-          <template #title>
-            5,007
-          </template>
-          <template #description>
-            total backers
-          </template>
+        <ProjectMeta
+          :value="5007"
+          class="separator"
+        >
+          total backers
         </ProjectMeta>
 
-        <ProjectMeta class="separator">
-          <template #title>
-            {{ daysLeft }}
-          </template>
-          <template #description>
-            days left
-          </template>
+        <ProjectMeta
+          :value="daysLeft"
+          class="separator"
+        >
+          days left
         </ProjectMeta>
       </div>
 
-      <ProjectProgress :progress="90" />
+      <ProjectProgress
+        :progress="89914"
+        :goal="project.goal"
+      />
     </div>
   </header>
 </template>
 
 <script>
+import headerThumbnailState from '~/common/state/header.js'
+
 export default {
 
   name: 'ProjectHeader',
@@ -66,9 +69,17 @@ export default {
   },
 
   computed: {
+    /**
+     * [FR] Retourne le nombre de jours restant pour participer au format JJ
+     * [EN] Returns the number of days remaining to participate in DD format
+     */
     daysLeft () {
-      return Math.ceil((new Date(this.project.dateEnd) - new Date()) / (1000 * 60 * 60 * 24))
+      return Math.max(0, Math.ceil((new Date(this.project.dateEnd) - new Date()) / (1000 * 60 * 60 * 24)))
     }
+  },
+
+  beforeMount () {
+    headerThumbnailState.src = `http://localhost:1337${this.project.thumbnail.url}`
   }
 }
 </script>

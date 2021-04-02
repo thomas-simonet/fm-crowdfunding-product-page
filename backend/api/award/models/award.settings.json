@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "awards",
+  "info": {
+    "name": "reward",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "minimumPledge": {
+      "type": "integer"
+    },
+    "maximumPledge": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "text"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "project": {
+      "model": "project",
+      "via": "rewards"
+    }
+  }
+}

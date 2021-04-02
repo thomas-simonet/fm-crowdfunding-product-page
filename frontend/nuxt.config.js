@@ -12,6 +12,11 @@ export default {
     ]
   },
 
+  loading: {
+    color: '#3CB3AB',
+    height: '5px'
+  },
+
   css: ['@/assets/scss/style.scss'],
 
   plugins: [],
@@ -52,6 +57,13 @@ export default {
       Commissioner: [400, 500, 700]
     },
     display: 'swap'
+  },
+
+  publicRuntimeConfig: {
+    proxy: [
+      // Proxies /graphql to http://localhost:1337/graphql
+      `${process.env.API_URL}/graphql`
+    ]
   },
 
   build: {}

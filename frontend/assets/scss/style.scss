@@ -1,13 +1,46 @@
 
-html,
+html {
+  height: 100%;
+}
+
 body,
 #__nuxt,
-#__layout {
-  min-height: 100%;
+#__layout,
+#__layout > div {
+  min-height: 100vh;
 }
 
 body {
   font-family: "Commissioner";
   line-height: 17px;
   background-color: #fafafa;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+
+  .single-project,
+  .projects-list {
+    transition: transform 20s;
+  }
+}
+
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+.page-enter {
+  .single-project,
+  .projects-list {
+    transform: translateX(-50px);
+  }
+}
+
+.page-leave-to {
+  .single-project,
+  .projects-list {
+    transform: translateX(50px);
+  }
 }

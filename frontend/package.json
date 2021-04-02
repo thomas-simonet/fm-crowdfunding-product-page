@@ -1,6 +1,9 @@
 {
   "name": "frontend",
   "version": "1.0.0",
+  "author": {
+    "name": "Thomas Simonet"
+  },
   "private": true,
   "scripts": {
     "dev": "nuxt",

@@ -1,5 +1,5 @@
 
-export const allProjects = {
+export const getProjects = {
   query: `query {
     projects {
       id
@@ -10,7 +10,7 @@ export const allProjects = {
   }`
 }
 
-export const Project = `query Projects($slug: String!) {
+export const getProjectBySlug = `query Projects($slug: String!) {
   projects(where: {slug: $slug}) {
     id
     slug
@@ -21,6 +21,13 @@ export const Project = `query Projects($slug: String!) {
     dateEnd,
     thumbnail {
       url
+    }
+    rewards {
+      id
+      title
+      description
+      minimumPledge
+      quantity
     }
   }
 }`

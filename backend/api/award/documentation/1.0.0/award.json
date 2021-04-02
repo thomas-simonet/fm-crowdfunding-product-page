@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/projects": {
+    "/awards": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Project"
+                    "$ref": "#/components/schemas/Award"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Project"
+          "Award"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Project"
+                  "$ref": "#/components/schemas/Award"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Project"
+          "Award"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewProject"
+                "$ref": "#/components/schemas/NewAward"
               }
             }
           }
         }
       }
     },
-    "/projects/count": {
+    "/awards/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Project"
+          "Award"
         ],
         "parameters": []
       }
     },
-    "/projects/{id}": {
+    "/awards/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Project"
+                  "$ref": "#/components/schemas/Award"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Project"
+          "Award"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Project"
+                  "$ref": "#/components/schemas/Award"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Project"
+          "Award"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewProject"
+                "$ref": "#/components/schemas/NewAward"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Project"
+          "Award"
         ],
         "parameters": [
           {
@@ -514,13 +514,10 @@
   },
   "components": {
     "schemas": {
-      "Project": {
+      "Award": {
         "required": [
           "id",
-          "dateEnd",
-          "thumbnail",
-          "goal",
-          "shortDescription"
+          "title"
         ],
         "properties": {
           "id": {
@@ -529,70 +526,58 @@
           "title": {
             "type": "string"
           },
+          "minimumPledge": {
+            "type": "integer"
+          },
+          "maximumPledge": {
+            "type": "integer"
+          },
           "description": {
             "type": "string"
           },
-          "dateEnd": {
-            "type": "string",
-            "format": "date"
+          "quantity": {
+            "type": "integer"
           },
-          "thumbnail": {
+          "project": {
             "required": [
               "id",
-              "name",
-              "hash",
-              "mime",
-              "size",
-              "url",
-              "provider"
+              "dateEnd",
+              "thumbnail",
+              "goal",
+              "shortDescription"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "name": {
+              "title": {
                 "type": "string"
               },
-              "alternativeText": {
+              "description": {
                 "type": "string"
               },
-              "caption": {
+              "dateEnd": {
                 "type": "string"
               },
-              "width": {
+              "thumbnail": {
+                "type": "string"
+              },
+              "goal": {
                 "type": "integer"
               },
-              "height": {
-                "type": "integer"
-              },
-              "formats": {
-                "type": "object"
-              },
-              "hash": {
+              "shortDescription": {
                 "type": "string"
               },
-              "ext": {
-                "type": "string"
+              "slug": {
+                "type": "uid"
               },
-              "mime": {
-                "type": "string"
+              "rewards": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
-              "size": {
-                "type": "number"
-              },
-              "url": {
-                "type": "string"
-              },
-              "previewUrl": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "provider_metadata": {
-                "type": "object"
-              },
-              "related": {
+              "published_at": {
                 "type": "string"
               },
               "created_by": {
@@ -603,97 +588,34 @@
               }
             }
           },
-          "goal": {
-            "type": "integer"
-          },
-          "shortDescription": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 50
-          },
-          "slug": {
-            "type": "uid"
-          },
-          "rewards": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "title"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "minimumPledge": {
-                  "type": "integer"
-                },
-                "maximumPledge": {
-                  "type": "integer"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "quantity": {
-                  "type": "integer"
-                },
-                "project": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "published_at": {
             "type": "string",
             "format": "date-time"
           }
         }
       },
-      "NewProject": {
+      "NewAward": {
         "required": [
-          "dateEnd",
-          "goal",
-          "shortDescription"
+          "title"
         ],
         "properties": {
           "title": {
             "type": "string"
           },
+          "minimumPledge": {
+            "type": "integer"
+          },
+          "maximumPledge": {
+            "type": "integer"
+          },
           "description": {
             "type": "string"
           },
-          "dateEnd": {
-            "type": "string",
-            "format": "date"
-          },
-          "goal": {
+          "quantity": {
             "type": "integer"
           },
-          "shortDescription": {
-            "type": "string",
-            "maxLength": 200,
-            "minLength": 50
-          },
-          "slug": {
-            "type": "uid"
-          },
-          "rewards": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "project": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -711,7 +633,7 @@
   },
   "tags": [
     {
-      "name": "Project"
+      "name": "Award"
     }
   ]
 }

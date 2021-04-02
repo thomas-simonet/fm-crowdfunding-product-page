@@ -3,17 +3,61 @@
     <div
       class="mb-2 text-[2rem] font-bold leading-10"
     >
-      <slot name="title" />
+      {{ `${prefix}${valueAnimated}` }}
     </div>
     <div class="text-sm leading-4 text-gray-800 lead">
-      <slot name="description" />
+      <slot />
     </div>
   </div>
 </template>
 
 <script>
+import animateNumber from '~/common/mixins/animateNumber.js'
+
 export default {
-  name: 'ProjectMeta'
+
+  name: 'ProjectMeta',
+
+  mixins: [animateNumber],
+
+  props: {
+    prefix: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    value: {
+      type: Number,
+      required: true
+    }
+  },
+
+  data () {
+    return {
+      valueAnimated: 0
+    }
+  },
+
+  mounted () {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.animateNumber('valueAnimated', 0, this.value, 2000)
+          observer.unobserve(this.$el)
+        }
+      })
+    }, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 1.0
+    })
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      observer.observe(this.$el)
+    } else {
+      this.valueAnimated = this.value
+    }
+  }
 }
 </script>
 

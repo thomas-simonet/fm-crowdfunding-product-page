@@ -12,6 +12,7 @@
         <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0V18L5 12.9419L10 18V0H0Z" />
       </svg>
     </div>
+
     <div
       class="grid place-items-center rounded-[2rem] sr-only sm:not-sr-only sm:ml-4 sm:pr-6"
       :class="[ !bookmarked ? 'text-gray-800' : 'text-cyan-900' ]"
