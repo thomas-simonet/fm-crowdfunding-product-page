@@ -5,6 +5,8 @@
   >
     <ProjectHeader :project="project" />
     <ProjectBody :project="project" />
+
+    <PledgeModal :project="project" />
   </article>
 </template>
 

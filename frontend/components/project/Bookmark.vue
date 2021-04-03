@@ -24,6 +24,9 @@
 
 <script>
 export default {
+
+  name: 'ProjectBookmark',
+
   props: {
     bookmarked: {
       type: Boolean,

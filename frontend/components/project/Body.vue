@@ -9,7 +9,7 @@
     </div>
 
     <div class="space-y-6">
-      <Reward
+      <ProjectReward
         v-for="reward in rewardsWithQuantity"
         :key="reward.id"
         :reward="reward"

@@ -9,6 +9,7 @@ body,
 #__layout > div {
   min-height: 100vh;
 }
+@import './micromodal.scss';
 
 body {
   font-family: "Commissioner";

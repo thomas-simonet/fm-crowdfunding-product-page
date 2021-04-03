@@ -19,7 +19,7 @@ export default {
 
   css: ['@/assets/scss/style.scss'],
 
-  plugins: [],
+  plugins: ['~plugins/micromodal.client.js'],
 
   components: true,
 

@@ -23,7 +23,8 @@ export default {
     },
     max: {
       type: Number,
-      required: true
+      required: false,
+      default: 9999
     },
     currency: {
       type: String,

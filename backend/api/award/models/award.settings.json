@@ -17,7 +17,8 @@
       "unique": true
     },
     "minimumPledge": {
-      "type": "integer"
+      "type": "integer",
+      "min": 1
     },
     "maximumPledge": {
       "type": "integer"

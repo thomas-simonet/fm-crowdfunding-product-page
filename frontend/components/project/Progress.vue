@@ -2,9 +2,10 @@
   <progress
     :value="percentage"
     max="100"
-  >
-    Progress: {{ percentage }}%
-  </progress>
+    aria-valuemin="0"
+    :aria-valuemax="goal"
+    :aria-valuetext="`${percentage}% completed`"
+  />
 </template>
 
 <script>
@@ -25,7 +26,7 @@ export default {
 
   computed: {
     percentage () {
-      return (this.goal / this.progress)
+      return Math.round(this.goal / this.progress)
     }
   }
 }

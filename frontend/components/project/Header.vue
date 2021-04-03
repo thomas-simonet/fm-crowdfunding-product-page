@@ -14,11 +14,13 @@
       </p>
 
       <div class="flex justify-between">
-        <Button>
+        <Button
+          @click.native="openModal"
+        >
           Back this project
         </Button>
 
-        <Bookmark />
+        <ProjectBookmark />
       </div>
     </div>
 
@@ -80,6 +82,17 @@ export default {
 
   beforeMount () {
     headerThumbnailState.src = `http://localhost:1337${this.project.thumbnail.url}`
+  },
+
+  methods: {
+    openModal () {
+      this.$modal.show('modal-pledges', {
+        // disableScroll: true,
+        onShow: (modal) => {
+          modal.querySelector('.modal__overlay').scrollTop = 0
+        }
+      })
+    }
   }
 }
 </script>

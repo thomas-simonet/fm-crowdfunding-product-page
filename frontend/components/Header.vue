@@ -13,7 +13,8 @@
       >
     </Transition>
 
-    <Nav />
+    <!-- https://fr.vuejs.org/v2/guide/components-custom-events.html#Modificateur-sync -->
+    <Nav :menu-active.sync="menuActive" />
   </header>
 </template>
 
@@ -21,6 +22,12 @@
 import headerThumbnailState from '~/common/state/header.js'
 
 export default {
+
+  data () {
+    return {
+      menuActive: false
+    }
+  },
   computed: {
     headerThumbnailState () {
       return headerThumbnailState

@@ -9,7 +9,7 @@
 
     <button
       class="md:hidden"
-      @click="menuActive = ! menuActive"
+      @click="$emit('update:menuActive', !menuActive)"
     >
       <Transition
         name="fade-menu"
@@ -25,7 +25,7 @@
     </button>
 
     <div
-      class="absolute top-[88px] inset-x-6 md:hidden"
+      class="absolute top-[88px] inset-x-0 md:hidden"
     >
       <TransitionGroup
         name="fade-delay"
@@ -92,9 +92,10 @@
 <script>
 export default {
 
-  data () {
-    return {
-      menuActive: false
+  props: {
+    menuActive: {
+      type: Boolean,
+      required: true
     }
   }
 }

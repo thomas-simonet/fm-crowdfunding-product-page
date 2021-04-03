@@ -29,6 +29,7 @@
       <Button
         class="btn-small"
         :disabled="!reward.quantity"
+        @click.native="openModal"
       >
         {{ reward.quantity ? 'Select Reward' : 'Out of stock' }}
       </Button>
@@ -38,10 +39,27 @@
 
 <script>
 export default {
+
+  name: 'ProjectReward',
+
   props: {
     reward: {
       type: Object,
       required: true
+    }
+  },
+
+  mounted () {
+    this.openModal()
+  },
+  methods: {
+    openModal () {
+      this.$modal.show('modal-pledges', {
+        disableScroll: true,
+        onShow: (modal) => {
+          modal.querySelector('.modal__overlay').scrollTop = 0
+        }
+      })
     }
   }
 }
