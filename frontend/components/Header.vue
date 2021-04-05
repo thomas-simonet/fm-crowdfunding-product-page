@@ -5,8 +5,8 @@
   >
     <Transition name="fade" mode="out-in">
       <img
-        :key="headerThumbnailState.src"
-        :src="headerThumbnailState.src"
+        :key="getThumbnail"
+        :src="getThumbnail"
         class="w-full h-[300px] object-cover md:h-[400px]"
         loading="lazy"
         alt=""
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import headerThumbnailState from '~/common/state/header.js'
+import { mapGetters } from 'vuex'
 
 export default {
 
@@ -28,10 +28,9 @@ export default {
       menuActive: false
     }
   },
+
   computed: {
-    headerThumbnailState () {
-      return headerThumbnailState
-    }
+    ...mapGetters('header', ['getThumbnail'])
   }
 }
 </script>

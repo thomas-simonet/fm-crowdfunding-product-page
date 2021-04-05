@@ -4,9 +4,9 @@
     :class="[ reward.quantity === 0 ? 'opacity-50' : null ]"
   >
     <header class="mb-6 text-sm leading-4 sm:flex sm:justify-between ">
-      <h1 class="mb-2 font-bold sm:mb-0 sm:text-lg ">
+      <h3 class="mb-2 font-bold sm:mb-0 sm:text-lg ">
         {{ reward.title }}
-      </h1>
+      </h3>
       <div class="text-cyan-500 font-medium">
         {{ `Pledge $${reward.minimumPledge} or more` }}
       </div>
@@ -29,7 +29,7 @@
       <Button
         class="btn-small"
         :disabled="!reward.quantity"
-        @click.native="openModal"
+        @click.native="$nuxt.$emit('open-modal', 'PledgeModal')"
       >
         {{ reward.quantity ? 'Select Reward' : 'Out of stock' }}
       </Button>
@@ -46,20 +46,6 @@ export default {
     reward: {
       type: Object,
       required: true
-    }
-  },
-
-  mounted () {
-    this.openModal()
-  },
-  methods: {
-    openModal () {
-      this.$modal.show('modal-pledges', {
-        disableScroll: true,
-        onShow: (modal) => {
-          modal.querySelector('.modal__overlay').scrollTop = 0
-        }
-      })
     }
   }
 }

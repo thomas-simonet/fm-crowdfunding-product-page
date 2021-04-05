@@ -45,3 +45,8 @@ body {
     transform: translateX(50px);
   }
 }
+
+
+*:focus {
+  outline: 3px dashed red !important;
+}

@@ -32,14 +32,13 @@
 </template>
 
 <script>
-import { getProjects } from '~/common/graphql/query.js'
-import headerThumbnailState from '~/common/state/header.js'
+import { fetchProjects } from '~/common/graphql/query.js'
 
 export default {
 
   async fetch () {
     await this.$axios.post('/graphql',
-      getProjects
+      fetchProjects
     )
       .then((res) => {
         if (res.status === 200) {
@@ -55,8 +54,8 @@ export default {
     }
   },
 
-  beforeMount () {
-    headerThumbnailState.src = 'https://source.unsplash.com/random/2600x400'
+  mounted () {
+    this.$store.commit('header/SET_HEADER_THUMBNAIL', 'https://source.unsplash.com/random/2400x400')
   }
 }
 </script>

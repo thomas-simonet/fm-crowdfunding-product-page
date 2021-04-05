@@ -1,9 +1,9 @@
 <template>
-  <Modal :id="id">
+  <div>
     <header class="modal__header">
-      <h2 id="modal-1-title" class="modal__title mb-4">
+      <h1 id="modal-1-title" class="modal__title mb-4">
         Back this project
-      </h2>
+      </h1>
 
       <button
         class="modal__close"
@@ -29,37 +29,39 @@
         :reward="reward"
       />
     </div>
-  </Modal>
+  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
 
   name: 'PledgeModal',
 
   props: {
-    project: {
-      type: Object,
+    loaded: {
+      type: Boolean,
       required: true
     }
   },
 
-  data () {
-    return {
-      id: 'modal-pledges'
-    }
-  },
-
   computed: {
+    ...mapGetters('project', ['getProject']),
+
     /**
-     * [FR] Retourne la liste des rewards triées par ordre croissant de 'minimumPledge'
+     * [FR] Retourne la liste des rewards triées du plus petit 'minimumPledge' au plus grand
      * [EN] Returns the list of rewards sorted in ascending order of 'minimumPledge'
      */
     rewardsSortedByMinimumPledgeASC () {
-      return this.project.rewards
+      return this.getProject.rewards
         .slice(0)
         .sort((a, b) => a.minimumPledge > b.minimumPledge)
     }
+  },
+
+  mounted () {
+    this.$emit('update:loaded', true)
   }
 }
 </script>

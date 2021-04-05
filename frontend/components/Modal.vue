@@ -1,7 +1,7 @@
 <template>
   <div
-    :id="id"
-    class="modal micromodal-slide"
+    id="modal"
+    class="modal"
     aria-hidden="true"
   >
     <div
@@ -15,19 +15,57 @@
         aria-modal="true"
         aria-labelledby="modal-1-title"
       >
-        <slot />
+        <Component
+          :is="view"
+          :loaded.sync="childLoaded"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { createFocusTrap } from 'focus-trap'
+
 export default {
-  props: {
-    id: {
-      type: String,
-      required: true
+  data () {
+    return {
+      view: null,
+      childLoaded: false
     }
+  },
+
+  watch: {
+    childLoaded (childLoaded) {
+      if (childLoaded) {
+        const container = document.querySelector('#modal .modal__container')
+
+        const focusTrap = createFocusTrap(container, {
+          clickOutsideDeactivates: true,
+          onActivate: () => (container.classList.add('trap', 'is-active')),
+          onDeactivate: () => (container.classList.remove('is-active'))
+        })
+
+        this.$modal.show('modal', {
+          disableScroll: true,
+          onShow: (modal) => {
+            focusTrap.activate()
+          },
+          onClose: (modal) => {
+            this.view = null
+            this.childLoaded = false
+
+            focusTrap.deactivate()
+          }
+        })
+      }
+    }
+  },
+
+  beforeMount () {
+    this.$nuxt.$on('open-modal', (view) => {
+      this.view = view
+    })
   }
 }
 </script>

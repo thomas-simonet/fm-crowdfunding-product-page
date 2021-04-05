@@ -3,48 +3,44 @@
     v-if="!$fetchState.pending"
     class="single-project"
   >
-    <ProjectHeader :project="project" />
-    <ProjectBody :project="project" />
-
-    <PledgeModal :project="project" />
+    <ProjectHeader />
+    <ProjectBody />
   </article>
 </template>
 
 <script>
-import { getProjectBySlug } from '~/common/graphql/query'
+import { mapGetters } from 'vuex'
+import { fetchProjectBySlug } from '~/common/graphql/query.js'
 
 export default {
 
   async fetch () {
     try {
-      this.project = await this.$axios.post('/graphql',
-        {
-          query: getProjectBySlug,
-          variables: {
-            slug: this.$route.params.slug
-          }
+      const project = await this.$axios.post('/graphql', {
+        query: fetchProjectBySlug,
+        variables: {
+          slug: this.$route.params.slug
         }
-      )
-        .then(res => res.data.data.projects[0])
+      })
+      this.$store.commit('project/SET_PROJECT', project.data.data.projects[0])
+      this.$store.commit('header/SET_HEADER_THUMBNAIL', `http://localhost:1337${this.getProject.thumbnail.url}`)
     } catch (err) {
       console.log(err)
     }
   },
 
-  data () {
-    return {
-      project: {}
-    }
+  computed: {
+    ...mapGetters('project', ['getProject'])
   },
 
   head () {
     return {
-      title: `${this.project.title} - Crowfund`,
+      title: `${this.getProject.title} - Crowfund`,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.project.shortDescription
+          content: this.getProject.shortDescription
         }
       ]
     }

@@ -6,16 +6,16 @@
       </div>
 
       <h1 class="mb-4 text-xl text-center font-bold leading-6 sm:text-3xl">
-        {{ project.title }}
+        {{ getProject.title }}
       </h1>
 
       <p class="mb-6 text-center text-gray-800 text-sm leading-6 md:text-base md:leading-5">
-        {{ project.shortDescription }}
+        {{ getProject.shortDescription }}
       </p>
 
       <div class="flex justify-between">
         <Button
-          @click.native="openModal"
+          @click.native="$nuxt.$emit('open-modal', 'PledgeModal')"
         >
           Back this project
         </Button>
@@ -30,7 +30,7 @@
           :prefix="'$'"
           :value="89914"
         >
-          {{ `of $${project.goal} backed` }}
+          {{ `of $${getProject.goal} backed` }}
         </ProjectMeta>
 
         <ProjectMeta
@@ -50,48 +50,28 @@
 
       <ProjectProgress
         :progress="89914"
-        :goal="project.goal"
+        :goal="getProject.goal"
       />
     </div>
   </header>
 </template>
 
 <script>
-import headerThumbnailState from '~/common/state/header.js'
+import { mapGetters } from 'vuex'
 
 export default {
 
   name: 'ProjectHeader',
 
-  props: {
-    project: {
-      type: Object,
-      required: true
-    }
-  },
-
   computed: {
+    ...mapGetters('project', ['getProject']),
+
     /**
      * [FR] Retourne le nombre de jours restant pour participer au format JJ
      * [EN] Returns the number of days remaining to participate in DD format
      */
     daysLeft () {
-      return Math.max(0, Math.ceil((new Date(this.project.dateEnd) - new Date()) / (1000 * 60 * 60 * 24)))
-    }
-  },
-
-  beforeMount () {
-    headerThumbnailState.src = `http://localhost:1337${this.project.thumbnail.url}`
-  },
-
-  methods: {
-    openModal () {
-      this.$modal.show('modal-pledges', {
-        // disableScroll: true,
-        onShow: (modal) => {
-          modal.querySelector('.modal__overlay').scrollTop = 0
-        }
-      })
+      return Math.max(0, Math.ceil((new Date(this.getProject.dateEnd) - new Date()) / (1000 * 60 * 60 * 24)))
     }
   }
 }

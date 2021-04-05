@@ -5,12 +5,16 @@
     </h2>
 
     <div class="mb-8 text-sm text-gray-800 leading-6 sm:text-base sm:leading-8 sm:mb-10">
-      {{ project.description }}
+      {{ getProject.description }}
     </div>
 
     <div class="space-y-6">
+      <h2 class="sr-only">
+        Rewards
+      </h2>
+
       <ProjectReward
-        v-for="reward in rewardsWithQuantity"
+        v-for="reward in rewardsInStock"
         :key="reward.id"
         :reward="reward"
       />
@@ -19,24 +23,22 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
 
   name: 'ProjectBody',
 
-  props: {
-    project: {
-      type: Object,
-      required: true
-    }
-  },
-
   computed: {
+    ...mapGetters('project', ['getProject']),
+
     /**
      * [FR] Retourne la liste des récompenses ayant le champ quantité renseigné
      * [EN] Returns the list of rewards with the quantity field filled in
      */
-    rewardsWithQuantity () {
-      return this.project.rewards.filter(reward => reward.quantity !== null)
+    rewardsInStock () {
+      return this.getProject.rewards
+        .filter(reward => reward.quantity !== null)
     }
   }
 }

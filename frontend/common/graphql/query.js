@@ -1,5 +1,5 @@
 
-export const getProjects = {
+export const fetchProjects = {
   query: `query {
     projects {
       id
@@ -10,7 +10,7 @@ export const getProjects = {
   }`
 }
 
-export const getProjectBySlug = `query Projects($slug: String!) {
+export const fetchProjectBySlug = `query Projects($slug: String!) {
   projects(where: {slug: $slug}) {
     id
     slug

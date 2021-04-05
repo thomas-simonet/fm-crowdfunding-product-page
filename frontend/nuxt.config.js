@@ -66,5 +66,12 @@ export default {
     ]
   },
 
-  build: {}
+  build: {
+
+    hotMiddleware: {
+      client: {
+        noInfo: true
+      }
+    }
+  }
 }

@@ -4,6 +4,7 @@
     <main class="relative max-w-[730px] mx-6 md:mx-auto mb-20 ">
       <Nuxt />
     </main>
+    <Modal />
     <!-- <Footer class="mt-auto" /> -->
   </div>
 </template>
