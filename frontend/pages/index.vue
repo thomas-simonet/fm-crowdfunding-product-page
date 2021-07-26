@@ -3,10 +3,10 @@
     <article
       v-for="project in projects"
       :key="project.id"
-      class="bg-white px-6 pt-[52px] pb-10 rounded-lg border border-black border-opacity-5"
+      class="bg-white px-6 pt-[52px] pb-10 border rounded-lg border-black border-opacity-5"
     >
       <h1 class="mb-4 text-xl text-center font-bold leading-6 transition-colors duration-300 hover:text-cyan-900">
-        <NuxtLink :to="`project/${project.slug}`">
+        <NuxtLink :to="`/project/${project.slug}`">
           {{ project.title }}
         </NuxtLink>
       </h1>
@@ -16,7 +16,7 @@
       </p>
 
       <div class="flex justify-center">
-        <Button :to="`project/${project.slug}`">
+        <Button :to="`/project/${project.slug}`">
           Visit this project
         </Button>
       </div>
@@ -24,7 +24,7 @@
 
     <div
       v-if="!projects.length"
-      class="bg-white px-6 py-10 rounded-lg border border-black border-opacity-5"
+      class="bg-white px-6 py-10 border rounded-lgborder-black border-opacity-5"
     >
       Sorry, no project found :'(
     </div>

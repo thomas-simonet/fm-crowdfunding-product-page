@@ -15,7 +15,7 @@
 
       <div class="flex justify-between">
         <Button
-          @click.native="$nuxt.$emit('open-modal', 'PledgeModal')"
+          @click.native="$nuxt.$emit('open-modal', { component: 'RewardModal' })"
         >
           Back this project
         </Button>

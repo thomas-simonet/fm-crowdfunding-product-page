@@ -36,8 +36,7 @@ export default {
   ],
 
   tailwindcss: {
-    cssPath: '~/assets/css/tailwind.css',
-    jit: true
+    cssPath: '~/assets/css/tailwind.css'
   },
 
   axios: {
@@ -56,7 +55,8 @@ export default {
     families: {
       Commissioner: [400, 500, 700]
     },
-    display: 'swap'
+    display: 'swap',
+    prefetch: true
   },
 
   publicRuntimeConfig: {

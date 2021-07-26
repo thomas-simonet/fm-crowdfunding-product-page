@@ -16,9 +16,6 @@
 
 <script>
 export default {
-  name: 'PledgeForm'
+  name: 'RewardForm'
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

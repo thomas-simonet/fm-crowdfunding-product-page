@@ -29,7 +29,7 @@
       <Button
         class="btn-small"
         :disabled="!reward.quantity"
-        @click.native="$nuxt.$emit('open-modal', 'PledgeModal')"
+        @click.native="$nuxt.$emit('open-modal', { component: 'RewardModal', params: { reward: reward } })"
       >
         {{ reward.quantity ? 'Select Reward' : 'Out of stock' }}
       </Button>

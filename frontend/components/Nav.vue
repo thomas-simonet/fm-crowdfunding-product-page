@@ -4,7 +4,7 @@
       to="/"
       rel="home"
     >
-      <img src="~/assets/images/logo.svg" alt="crowdfund">
+      <img src="~/assets/images/logo.svg" alt="Crowdfund">
     </NuxtLink>
 
     <button
@@ -31,13 +31,17 @@
         name="fade-delay"
         mode="out-in"
         tag="ul"
+        class="text-lg font-medium leading-[22px]"
       >
         <li
           v-if="menuActive"
           key="about"
-          class="p-6 bg-white text-lg font-medium leading-[22px] rounded-t-lg"
+          class="bg-white rounded-t-lg"
         >
-          <NuxtLink to="/about">
+          <NuxtLink
+            class="block p-6"
+            to="/about"
+          >
             About
           </NuxtLink>
         </li>
@@ -45,9 +49,12 @@
         <li
           v-if="menuActive"
           key="discover"
-          class="p-6 bg-white text-lg font-medium leading-[22px] border border-t border-b border-gray-900 border-opacity-10"
+          class="bg-white border border-t border-b border-gray-900 border-opacity-10"
         >
-          <NuxtLink to="/discover">
+          <NuxtLink
+            class="block p-6"
+            to="/discover"
+          >
             Discover
           </NuxtLink>
         </li>
@@ -55,9 +62,12 @@
         <li
           v-if="menuActive"
           key="started"
-          class="p-6 bg-white text-lg font-medium leading-[22px] rounded-b-lg"
+          class="bg-white rounded-b-lg"
         >
-          <NuxtLink to="/get-started">
+          <NuxtLink
+            class="block p-6"
+            to="/get-started"
+          >
             Get Started
           </NuxtLink>
         </li>
@@ -67,21 +77,21 @@
     <div class="hidden md:flex space-x-8 text-white text-sm font-medium">
       <NuxtLink
         class="hover:underline"
-        to="about"
+        to="/about"
       >
         About
       </NuxtLink>
 
       <NuxtLink
         class="hover:underline"
-        to="discover"
+        to="/discover"
       >
         Discover
       </NuxtLink>
 
       <NuxtLink
         class="hover:underline"
-        to="get-started"
+        to="/get-started"
       >
         Get Started
       </NuxtLink>
@@ -96,6 +106,17 @@ export default {
     menuActive: {
       type: Boolean,
       required: true
+    }
+  },
+
+  watch: {
+    $route () {
+      /**
+       * Close the menu on route change
+       */
+      if (this.menuActive) {
+        this.$emit('update:menuActive', !this.menuActive)
+      }
     }
   }
 }

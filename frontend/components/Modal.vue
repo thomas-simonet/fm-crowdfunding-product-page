@@ -1,6 +1,7 @@
 <template>
   <div
     id="modal"
+    ref="modalContainer"
     class="modal"
     aria-hidden="true"
   >
@@ -16,7 +17,8 @@
         aria-labelledby="modal-1-title"
       >
         <Component
-          :is="view"
+          :is="child"
+          :params="params"
           :loaded.sync="childLoaded"
         />
       </div>
@@ -30,30 +32,46 @@ import { createFocusTrap } from 'focus-trap'
 export default {
   data () {
     return {
-      view: null,
-      childLoaded: false
+      child: null,
+      childLoaded: false,
+      params: null
     }
   },
 
   watch: {
     childLoaded (childLoaded) {
       if (childLoaded) {
-        const container = document.querySelector('#modal .modal__container')
+        const container = this.$refs.modalContainer
 
         const focusTrap = createFocusTrap(container, {
           clickOutsideDeactivates: true,
           onActivate: () => (container.classList.add('trap', 'is-active')),
-          onDeactivate: () => (container.classList.remove('is-active'))
+          onDeactivate: () => (container.classList.remove('is-active')),
+          /**
+           * 1. Focus the reward corresponding on which button the user clicked
+           * 2. If no input are checked just focus the first one.
+           */
+          initialFocus: () => {
+            // 1
+            const checked = document.querySelector('.modal__container :checked')
+            if (checked) {
+              return checked
+            }
+            // End 1
+            return document.querySelector('.modal__container input') // 2
+          }
         })
 
         this.$modal.show('modal', {
           disableScroll: true,
-          onShow: (modal) => {
+          disableFocus: true,
+          onShow: () => {
             focusTrap.activate()
           },
-          onClose: (modal) => {
-            this.view = null
+          onClose: () => {
+            this.child = null
             this.childLoaded = false
+            this.params = null
 
             focusTrap.deactivate()
           }
@@ -63,8 +81,10 @@ export default {
   },
 
   beforeMount () {
-    this.$nuxt.$on('open-modal', (view) => {
-      this.view = view
+    this.$nuxt.$on('open-modal', (options) => {
+      this.child = options.component
+      this.childLoaded = false
+      this.params = options?.params
     })
   }
 }
