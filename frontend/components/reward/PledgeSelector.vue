@@ -5,11 +5,12 @@
     </span>
 
     <input
-      v-model="pledge"
+      :value="value"
       class="pl-10 py-4 font-body font-bold text-sm leading-none text-black border border-black border-opacity-15 rounded-[2rem] w-[100px] focus:border-cyan-500"
       type="number"
       :min="min"
       :max="max"
+      @input="$emit('input', $event.target.value)"
     >
   </div>
 </template>
@@ -19,6 +20,10 @@ export default {
   name: 'PledgeSelector',
 
   props: {
+    value: {
+      type: String,
+      required: true
+    },
     min: {
       type: Number,
       required: true
@@ -32,11 +37,6 @@ export default {
       type: String,
       required: false,
       default: '$'
-    }
-  },
-  data () {
-    return {
-      pledge: ''
     }
   }
 }

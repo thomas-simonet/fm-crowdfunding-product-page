@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="modal__header">
-      <div class="modal__title mb-4 font-body font-bold text-2xl">
+      <div class="modal__title mb-4 font-body font-bold text-lg sm:text-2xl">
         Back this project
       </div>
 
@@ -15,7 +15,7 @@
       </button>
     </div>
 
-    <div class="modal__content mb-8">
+    <div class="modal__content mb-8 text-sm sm:text-base text-gray-800">
       <p>Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?</p>
     </div>
 
@@ -61,8 +61,7 @@ export default {
     ...mapGetters('project', ['getProject']),
 
     /**
-     * [FR] Retourne la liste des rewards triées du plus petit 'minimumPledge' au plus grand
-     * [EN] Returns the list of rewards sorted in ascending order of 'minimumPledge'
+     * Returns the list of rewards sorted in ascending order of 'minimumPledge'
      */
     rewardsSortedByMinimumPledgeASC () {
       return this.getProject.rewards
@@ -88,7 +87,6 @@ export default {
      * Check if all rewards are mounted before opening the modal
      * If the modal is opened before, focus-trap can't find the input inside.
      * $nextTick doesn't help there.
-     * => Need a more robust solution for complex modal (With multiple components / loop)
      */
     isCompletelyMounted (index) {
       if (++index === this.rewardsSortedByMinimumPledgeASC.length) {
@@ -98,3 +96,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.modal.modal-rewardmodal .modal__container {
+  width: 90%;
+  max-width: 730px;
+}
+</style>

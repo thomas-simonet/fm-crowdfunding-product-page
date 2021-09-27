@@ -47,9 +47,9 @@ body {
 }
 
 
-*:focus {
-  outline: 3px dashed red !important;
-}
+// *:focus {
+//   outline: 3px dashed red !important;
+// }
 
 
 .custom-radio-btn {
@@ -61,6 +61,7 @@ body {
 
   label {
     position: relative;
+    color: #000;
     transition: color .3s;
     cursor: pointer;
 
@@ -97,7 +98,7 @@ body {
 
   input:checked ~ label,
   input:focus ~ label {
-    color: #3CB3AB;
+    // color: #3CB3AB;
     &:after {
       background-color: #3CB3AB;
     }

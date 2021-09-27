@@ -14,7 +14,6 @@
         class="modal__container"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="modal-1-title"
       >
         <Component
           :is="child"
@@ -34,7 +33,8 @@ export default {
     return {
       child: null,
       childLoaded: false,
-      params: null
+      params: null,
+      parentClass: ''
     }
   },
 
@@ -45,8 +45,8 @@ export default {
 
         const focusTrap = createFocusTrap(container, {
           clickOutsideDeactivates: true,
-          onActivate: () => (container.classList.add('trap', 'is-active')),
-          onDeactivate: () => (container.classList.remove('is-active')),
+          onActivate: () => (container.classList.add('trap', 'is-active', this.parentClass)),
+          onDeactivate: () => (container.classList.remove('is-active', this.parentClass)),
           /**
            * 1. Focus the reward corresponding on which button the user clicked
            * 2. If no input are checked just focus the first one.
@@ -85,6 +85,7 @@ export default {
       this.child = options.component
       this.childLoaded = false
       this.params = options?.params
+      this.parentClass = `modal-${options.component.toLowerCase()}`
     })
   }
 }

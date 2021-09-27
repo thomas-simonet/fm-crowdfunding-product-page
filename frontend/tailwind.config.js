@@ -27,7 +27,10 @@ module.exports = {
         900: 'hsl(0, 0%, 18%)'
       },
       white: colors.white,
-      black: colors.black
+      black: colors.black,
+      red: {
+        ...colors.red
+      }
     }
   },
   variants: {},
